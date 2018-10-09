@@ -28,6 +28,7 @@ public class ZEdit extends JFrame {
     text.setBackground(new Color(0, 43, 54));
     text.setForeground(new Color(131, 148, 150));
     text.setCaretColor(new Color(131, 148, 150));
+    text.setFont(new Font("monospace", 0, 14));
     scroll.setBounds(0, 0, 768, 728);
     panel.add(scroll);
 
@@ -38,7 +39,7 @@ public class ZEdit extends JFrame {
       while ((line = read.readLine()) != null)
         text.append(line + "\n");
       read.close();
-        
+
     } catch (Exception er) {}
 
     // adds the save button

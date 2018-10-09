@@ -1,5 +1,5 @@
 # Text-Editer
 To run this text editer run
 ```
-java TextEditer (file path)
+java ZEdit (file path)
 ```

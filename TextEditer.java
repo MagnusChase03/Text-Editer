@@ -37,6 +37,7 @@ public class TextEditer extends JFrame {
       String line;
       while ((line = read.readLine()) != null)
         text.append(line + "\n");
+      read.close();
         
     } catch (Exception er) {}
 

@@ -11,7 +11,10 @@ import java.util.*;
 // class which extends JFrame to create window
 public class ZEdit extends JFrame {
 
-  public ZEdit(String file) {
+  public static JTextArea text;
+  public static JTextField filepath;
+
+  public ZEdit() {
 
     // sets up basic window
     setTitle("ZEdit");
@@ -25,7 +28,7 @@ public class ZEdit extends JFrame {
     add(panel);
 
     // adds the text editer
-    JTextArea text = new JTextArea();
+    text = new JTextArea();
     JScrollPane scroll = new JScrollPane(text);
     text.setMargin(new Insets(5, 5, 0, 0));
     text.setBackground(new Color(0, 43, 54));
@@ -34,6 +37,40 @@ public class ZEdit extends JFrame {
     text.setFont(new Font("monospace", 0, 14));
     scroll.setBounds(0, 0, 768, 728);
     panel.add(scroll);
+
+    // adds the save button
+    JButton save = new JButton("Save");
+    save.setBounds(20, 738, 100, 25);
+    save.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getModifiers() == 16)
+              write(filepath.getText());
+        }
+    });
+    panel.add(save);
+
+    // adds an open button
+    JButton open = new JButton("Open");
+    open.setBounds(140, 738, 100, 25);
+    open.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getModifiers() == 16)
+              read(filepath.getText());
+        }
+    });
+    panel.add(open);
+
+    // adds the text field to enter file path
+    filepath = new JTextField();
+    filepath.setBounds(260, 738, 150, 25);
+    panel.add(filepath);
+
+    // shows the window
+    setVisible(true);
+
+  }
+
+  public static void read(String file) {
 
     // reads in file and puts it in editer
     try {
@@ -45,32 +82,22 @@ public class ZEdit extends JFrame {
 
     } catch (Exception er) {}
 
-    // adds the save button
-    JButton save = new JButton("Save to " + file);
-    save.setBounds(20, 738, 200, 25);
-    save.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            if (e.getModifiers() == 16) {
-                try {
-                  BufferedWriter scan = new BufferedWriter(new FileWriter(file));
-                  scan.write(text.getText());
-                  scan.close();
-                } catch (Exception er) {}
-            }
-        }
-    });
-    panel.add(save);
+  }
 
-    // shows the window
-    setVisible(true);
+  public static void write(String file) {
+
+    try {
+      BufferedWriter scan = new BufferedWriter(new FileWriter(file));
+      scan.write(text.getText());
+      scan.close();
+    } catch (Exception er) {}
 
   }
 
   public static void main(String[] args) {
 
-    // creates the text editer with where to save file
-    if (args.length > 0)
-      new ZEdit(args[0]);
+    // creates a new text editer
+    new ZEdit();
 
   }
 

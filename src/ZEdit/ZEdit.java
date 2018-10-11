@@ -62,6 +62,7 @@ public class ZEdit extends JFrame {
 
     // adds the text field to enter file path
     filepath = new JTextField();
+    filepath.setText("Filepath");
     filepath.setBounds(260, 738, 150, 25);
     panel.add(filepath);
 
